@@ -1,0 +1,27 @@
+<section class="page-header">
+  <div>
+    <h2>Movimentações</h2>
+    <p>Produtos comprados ou separados para revenda pelos clientes.</p>
+  </div>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Produto</th>
+      <th>Status</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% movements.forEach(item => { %>
+      <tr>
+        <td><%= item.user_name %></td>
+        <td><%= item.product_name %></td>
+        <td><%= item.status === 'revenda' ? 'Para revenda' : 'Comprado' %></td>
+        <td><%= new Date(item.created_at).toLocaleString('pt-BR') %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

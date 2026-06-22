@@ -1,0 +1,40 @@
+<section class="page-header">
+  <div>
+    <h2>Produtos disponíveis</h2>
+    <p>Escolha como comprado ou para revender.</p>
+  </div>
+</section>
+
+<section class="grid-products">
+  <% products.forEach(product => { %>
+    <article class="product-card">
+      <% if (product.image) { %>
+        <img src="/uploads/<%= product.image %>" alt="<%= product.name %>">
+      <% } else { %>
+        <div class="no-image">Sem imagem</div>
+      <% } %>
+
+      <h3><%= product.name %></h3>
+      <p><%= product.description || 'Sem descrição' %></p>
+      <strong>R$ <%= Number(product.price).toFixed(2) %></strong>
+
+      <% if (product.quantity <= 0) { %>
+        <span class="out">Produto esgotado</span>
+      <% } else { %>
+        <span>Disponível: <%= product.quantity %></span>
+
+        <div class="actions">
+          <form action="/cliente/produtos/<%= product.id %>/adicionar" method="POST">
+            <input type="hidden" name="status" value="comprado">
+            <button class="btn buy">Comprado</button>
+          </form>
+
+          <form action="/cliente/produtos/<%= product.id %>/adicionar" method="POST">
+            <input type="hidden" name="status" value="revenda">
+            <button class="btn resell">Para revender</button>
+          </form>
+        </div>
+      <% } %>
+    </article>
+  <% }) %>
+</section>

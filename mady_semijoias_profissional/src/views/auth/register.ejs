@@ -1,0 +1,24 @@
+<section class="auth-card">
+  <img src="/public/img/logo.png" class="auth-logo" alt="Mady Semijoias">
+  <h2>Cadastro de cliente</h2>
+
+  <form action="/cadastro" method="POST">
+    <label>Nome completo</label>
+    <input type="text" name="name" required placeholder="Digite seu nome">
+
+    <label>E-mail</label>
+    <input type="email" name="email" required placeholder="Digite seu e-mail">
+
+    <label>Telefone</label>
+    <input type="text" name="phone" placeholder="Digite seu telefone">
+
+    <label>Senha</label>
+    <input type="password" name="password" required placeholder="Crie uma senha">
+
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <p class="center">
+    Já tem conta? <a href="/login">Entrar</a>
+  </p>
+</section>

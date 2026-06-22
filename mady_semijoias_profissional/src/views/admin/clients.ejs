@@ -1,0 +1,27 @@
+<section class="page-header">
+  <div>
+    <h2>Clientes cadastrados</h2>
+    <p>Lista de clientes que criaram conta no sistema.</p>
+  </div>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Telefone</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% clients.forEach(client => { %>
+      <tr>
+        <td><%= client.name %></td>
+        <td><%= client.email %></td>
+        <td><%= client.phone || '-' %></td>
+        <td><%= new Date(client.created_at).toLocaleDateString('pt-BR') %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

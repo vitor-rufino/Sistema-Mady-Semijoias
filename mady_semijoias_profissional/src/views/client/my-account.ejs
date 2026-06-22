@@ -1,0 +1,29 @@
+<section class="page-header">
+  <div>
+    <h2>Minha conta</h2>
+    <p>Produtos adicionados como comprado ou para revenda.</p>
+  </div>
+</section>
+
+<section class="account-list">
+  <% if (items.length === 0) { %>
+    <div class="empty">Você ainda não adicionou nenhum produto.</div>
+  <% } %>
+
+  <% items.forEach(item => { %>
+    <article class="account-item">
+      <% if (item.image) { %>
+        <img src="/uploads/<%= item.image %>" alt="<%= item.name %>">
+      <% } else { %>
+        <div class="mini-no-image">Sem imagem</div>
+      <% } %>
+
+      <div>
+        <h3><%= item.name %></h3>
+        <p>R$ <%= Number(item.price).toFixed(2) %></p>
+        <span><%= item.status === 'revenda' ? 'Para revender' : 'Comprado' %></span>
+        <small><%= new Date(item.created_at).toLocaleString('pt-BR') %></small>
+      </div>
+    </article>
+  <% }) %>
+</section>

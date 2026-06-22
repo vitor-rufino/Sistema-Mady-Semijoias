@@ -1,0 +1,32 @@
+<section class="form-card">
+  <h2><%= product ? 'Editar produto' : 'Cadastrar novo produto' %></h2>
+
+  <form 
+    action="<%= product ? '/admin/produtos/' + product.id + '?_method=PUT' : '/admin/produtos' %>" 
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <label>Nome da joia</label>
+    <input type="text" name="name" required value="<%= product ? product.name : '' %>">
+
+    <label>Descrição</label>
+    <textarea name="description" rows="4"><%= product ? product.description || '' : '' %></textarea>
+
+    <label>Preço</label>
+    <input type="number" step="0.01" name="price" required value="<%= product ? product.price : '' %>">
+
+    <label>Quantidade em estoque</label>
+    <input type="number" name="quantity" required value="<%= product ? product.quantity : '' %>">
+
+    <label>Imagem do produto</label>
+    <input type="file" name="image" accept="image/png,image/jpeg,image/webp">
+
+    <% if (product && product.image) { %>
+      <p>Imagem atual:</p>
+      <img src="/uploads/<%= product.image %>" class="preview" alt="Imagem atual">
+    <% } %>
+
+    <button type="submit"><%= product ? 'Salvar alterações' : 'Cadastrar produto' %></button>
+    <a class="btn secondary" href="/admin">Voltar</a>
+  </form>
+</section>

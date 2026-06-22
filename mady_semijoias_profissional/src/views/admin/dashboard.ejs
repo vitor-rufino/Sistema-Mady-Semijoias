@@ -1,0 +1,48 @@
+<section class="page-header">
+  <div>
+    <h2>Painel administrativo</h2>
+    <p>Bem-vindo, <%= user.name %>.</p>
+  </div>
+  <a class="btn" href="/admin/produtos/novo">+ Novo produto</a>
+</section>
+
+<section class="stats">
+  <div>
+    <strong><%= stats.total_products %></strong>
+    <span>Produtos cadastrados</span>
+  </div>
+  <div>
+    <strong><%= stats.total_stock %></strong>
+    <span>Itens em estoque</span>
+  </div>
+  <div>
+    <strong>R$ <%= Number(stats.stock_value).toFixed(2) %></strong>
+    <span>Valor total em estoque</span>
+  </div>
+</section>
+
+<section class="grid-products">
+  <% products.forEach(product => { %>
+    <article class="product-card">
+      <% if (product.image) { %>
+        <img src="/uploads/<%= product.image %>" alt="<%= product.name %>">
+      <% } else { %>
+        <div class="no-image">Sem imagem</div>
+      <% } %>
+
+      <h3><%= product.name %></h3>
+      <p><%= product.description || 'Sem descrição' %></p>
+      <strong>R$ <%= Number(product.price).toFixed(2) %></strong>
+      <span class="<%= product.quantity <= 0 ? 'out' : '' %>">
+        Estoque: <%= product.quantity %>
+      </span>
+
+      <div class="actions">
+        <a href="/admin/produtos/<%= product.id %>/editar" class="btn edit">Editar</a>
+        <form action="/admin/produtos/<%= product.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Deseja excluir este produto?')">
+          <button class="btn danger">Excluir</button>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>
