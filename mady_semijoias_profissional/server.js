@@ -40,7 +40,6 @@ app.use(
   session({
     key: "mady_semijoias_session",
     secret: process.env.SESSION_SECRET || "segredo_dev",
-    store: sessionStore,
     resave: false,
     saveUninitialized: false
   })
