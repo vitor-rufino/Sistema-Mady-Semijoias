@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
-const MySQLStore = require("express-mysql-session")(session);
 const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
@@ -16,25 +15,14 @@ const userRoutes = require("./src/routes/userRoutes");
 
 const app = express();
 
-const sessionStore = new MySQLStore({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT || 3306),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  clearExpired: true,
-  checkExpirationInterval: 900000,
-  expiration: 86400000,
-  createDatabaseTable: true,
-  schema: {
-    tableName: "sessions",
-    columnNames: {
-      session_id: "session_id",
-      expires: "expires",
-      data: "data"
-    }
-  }
-});
+app.use(
+  session({
+    key: "mady_semijoias_session",
+    secret: process.env.SESSION_SECRET || "segredo_dev",
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
