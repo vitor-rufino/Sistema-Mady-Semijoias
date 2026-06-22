@@ -18,11 +18,22 @@ const app = express();
 
 const sessionStore = new MySQLStore({
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT || 3306,
+  port: Number(process.env.DB_PORT || 3306),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  createDatabaseTable: true
+  clearExpired: true,
+  checkExpirationInterval: 900000,
+  expiration: 86400000,
+  createDatabaseTable: true,
+  schema: {
+    tableName: "sessions",
+    columnNames: {
+      session_id: "session_id",
+      expires: "expires",
+      data: "data"
+    }
+  }
 });
 
 app.set("view engine", "ejs");
