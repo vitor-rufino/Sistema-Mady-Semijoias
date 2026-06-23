@@ -74,3 +74,25 @@ exports.myAccount = async (req, res) => {
     items
   });
 };
+exports.cart = async (req, res) => {
+  const [items] = await db.query(`
+    SELECT up.*, p.name, p.price, p.image
+    FROM user_products up
+    INNER JOIN products p ON p.id = up.product_id
+    WHERE up.user_id = ?
+    ORDER BY up.id DESC
+  `, [req.session.user.id]);
+
+  res.render("client/cart", {
+    title: "Carrinho",
+    items
+  });
+};
+exports.removeFromCart = async (req, res) => {
+  await db.query(
+    "DELETE FROM user_products WHERE id = ? AND user_id = ?",
+    [req.params.id, req.session.user.id]
+  );
+
+  res.redirect("/cliente/carrinho");
+};
