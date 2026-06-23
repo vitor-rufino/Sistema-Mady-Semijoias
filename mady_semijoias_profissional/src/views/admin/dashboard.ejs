@@ -25,7 +25,7 @@
   <% products.forEach(product => { %>
     <article class="product-card">
       <% if (product.image) { %>
-        <img src="<%= product.image ? '/uploads/' + product.image : '/public/img/logo.png' %>" alt="<%= product.name %>">
+        <img src="<%= product.image ? '/uploads/' + product.image : '/img/logo.png' %>" alt="<%= product.name %>">
       <% } else { %>
         <div class="no-image">Sem imagem</div>
       <% } %>
