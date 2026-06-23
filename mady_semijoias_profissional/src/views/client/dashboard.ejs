@@ -24,6 +24,10 @@
         <span>Disponível: <%= product.quantity %></span>
 
         <div class="actions">
+          <form action="/cliente/produtos/<%= product.id %>/carrinho" method="POST">
+  <button class="btn" type="submit">Adicionar ao carrinho</button>
+</form>
+
           <form action="/cliente/produtos/<%= product.id %>/adicionar" method="POST">
             <input type="hidden" name="status" value="comprado">
             <button class="btn buy">Comprado</button>

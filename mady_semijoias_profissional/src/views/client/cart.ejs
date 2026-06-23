@@ -1,0 +1,19 @@
+<h2>Meu carrinho</h2>
+
+<% if (items.length === 0) { %>
+  <p>Seu carrinho está vazio.</p>
+<% } %>
+
+<% items.forEach(item => { %>
+  <div class="product-card">
+    <img src="/uploads/<%= item.image %>" width="90">
+    <div>
+      <h3><%= item.name %></h3>
+      <p>R$ <%= Number(item.price).toFixed(2) %></p>
+
+      <form action="/cliente/carrinho/remover/<%= item.id %>" method="POST">
+        <button type="submit">Remover do carrinho</button>
+      </form>
+    </div>
+  </div>
+<% }) %>
